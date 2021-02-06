@@ -1,0 +1,23 @@
+{
+  "name": "lan-clipboard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IsmailElShinnawy/LAN-Clipboard.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IsmailElShinnawy/LAN-Clipboard/issues"
+  },
+  "homepage": "https://github.com/IsmailElShinnawy/LAN-Clipboard#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^3.1.1"
+  }
+}
