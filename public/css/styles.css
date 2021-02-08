@@ -1,6 +1,71 @@
-.clipboard{
-    background-color: #e6e6e6;
-    border-radius: 10px;
-    margin-top: 10px;
-    height: 90%;
+/* SIDE BAR STYLES */
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
 }
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+/* END OF SIDE BAR STYLES */
+
+/* CLIPBOARD STYLES */
+body {
+  height: 100vh;
+  width: 100vw;
+}
+.container{
+  height: 90%;
+  min-height: 90%;
+  background-color: #e6e6e6;
+}
+.clipboard{
+  height: 90%;
+  overflow-y: scroll;
+}
+.myForm{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.item{
+  width: 90%;
+  margin: 20px;
+  border-radius: 10px;
+  padding: 5px;
+  display: inline-block;
+  /* white-space: nowrap;
+  overflow-x: scroll; */
+}
+.item-wrapper{
+  display: flex;
+  align-items: center;
+  margin: 5px;
+  border-bottom: 1px solid #b5b5b5;
+}
+/* END OF CLIPBOARD STYLES */
