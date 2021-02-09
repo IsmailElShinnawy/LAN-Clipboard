@@ -45,7 +45,6 @@
             if (isClosed) openNav();
             else closeNav();
         }
-
     </script>
     <!-- END OF SIDE BAR -->
 
@@ -63,15 +62,17 @@
         </form>
 
         <div class="clipboard">
-            <% content.forEach((item)=> { %>
-                <div class="item-wrapper">
-                    <div class="item">
-                        <p><%= item.text %></p>
-                        <footer class="blockquote-footer"><%= item.user %> at <cite title="Source Title"><%= item.timestamp %></cite></footer>
+            <% if(content.length > 0) { %> 
+                <% content.forEach((item) => { %>
+                    <div class="item-wrapper">
+                        <div class="item">
+                            <p><%= item.text %></p>
+                            <footer class="blockquote-footer"><%= item.login_name %> at <cite title="Source Title"><%= item.timestamp %></cite></footer>
+                        </div>
+                        <button type="button" class="btn" style="margin: 10px"><span class="glyphicon glyphicon-copy"></button>
                     </div>
-                    <button type="button" class="btn" style="margin: 10px"><span class="glyphicon glyphicon-copy"></button>
-                </div>
-            <% }); %>
+                <% }); %>
+            <% } %> 
         </div>
     </div>
 

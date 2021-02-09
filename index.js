@@ -1,12 +1,14 @@
+require('dotenv').config();
 const express = require('express');
 const socketio = require('socket.io');
-require('dotenv').config();
+const itemsRouter = require('./routes/itemRoutes');
+// const pool = require('./model/database');
 
 const app = express(); // creates an Express App
 const PORT = process.env.PORT || 3000; // sets PORT number to the enviroment PORT if available or 3000
 
-// app listens to request made on the PORT specified and returns a server object
-const server = app.listen(PORT, '0.0.0.0', () => {
+// app listens to request made on the PORT specified
+const server = app.listen(PORT, () => {
     console.log(`listening on PORT ${PORT}`);
     console.log(`http://localhost:${PORT}`);
 });
@@ -17,75 +19,16 @@ app.use(express.urlencoded({ extended: true }));
 
 const io = socketio(server);
 io.on('connection', (socket)=>{
-    console.log(`user ${process.env.USERNAME} connected`);
+    console.log(`user connected`);
     socket.on('disconnect', ()=>{
         console.log('user disconnected');
     });
 });
 
-const content = [
-    {
-        text:'Magna est eu deserunt ipsum sunt. Fugiat veniam duis nulla ipsum qui sunt aliqua deserunt aute sint adipisicing pariatur nostrud. Ipsum ad Lorem pariatur ex voluptate. Sunt adipisicing elit excepteur sit aliqua commodo ad anim Lorem velit sit veniam ipsum.',
-        user: 'Ismail El Shinnawy',
-        timestamp: '01/01/2021 11:59 PM'
-    },
-    {
-        text:'Magna est eu deserunt ipsum sunt. Fugiat veniam duis nulla ipsum qui sunt aliqua deserunt aute sint adipisicing pariatur nostrud. Ipsum ad Lorem pariatur ex voluptate. Sunt adipisicing elit excepteur sit aliqua commodo ad anim Lorem velit sit veniam ipsum.',
-        user: 'Ismail El Shinnawy',
-        timestamp: '01/01/2021 11:59 PM'
-    },
-    {
-        text:'Magna est eu deserunt ipsum sunt. Fugiat veniam duis nulla ipsum qui sunt aliqua deserunt aute sint adipisicing pariatur nostrud. Ipsum ad Lorem pariatur ex voluptate. Sunt adipisicing elit excepteur sit aliqua commodo ad anim Lorem velit sit veniam ipsum.',
-        user: 'Ismail El Shinnawy',
-        timestamp: '01/01/2021 11:59 PM'
-    },
-    {
-        text:'Magna est eu deserunt ipsum sunt. Fugiat veniam duis nulla ipsum qui sunt aliqua deserunt aute sint adipisicing pariatur nostrud. Ipsum ad Lorem pariatur ex voluptate. Sunt adipisicing elit excepteur sit aliqua commodo ad anim Lorem velit sit veniam ipsum.',
-        user: 'Ismail El Shinnawy',
-        timestamp: '01/01/2021 11:59 PM'
-    },
-    {
-        text:'Magna est eu deserunt ipsum sunt. Fugiat veniam duis nulla ipsum qui sunt aliqua deserunt aute sint adipisicing pariatur nostrud. Ipsum ad Lorem pariatur ex voluptate. Sunt adipisicing elit excepteur sit aliqua commodo ad anim Lorem velit sit veniam ipsum.',
-        user: 'Ismail El Shinnawy',
-        timestamp: '01/01/2021 11:59 PM'
-    },
-    {
-        text:'Magna est eu deserunt ipsum sunt. Fugiat veniam duis nulla ipsum qui sunt aliqua deserunt aute sint adipisicing pariatur nostrud. Ipsum ad Lorem pariatur ex voluptate. Sunt adipisicing elit excepteur sit aliqua commodo ad anim Lorem velit sit veniam ipsum.',
-        user: 'Ismail El Shinnawy',
-        timestamp: '01/01/2021 11:59 PM'
-    },
-    {
-        text:'Magna est eu deserunt ipsum sunt. Fugiat veniam duis nulla ipsum qui sunt aliqua deserunt aute sint adipisicing pariatur nostrud. Ipsum ad Lorem pariatur ex voluptate. Sunt adipisicing elit excepteur sit aliqua commodo ad anim Lorem velit sit veniam ipsum.',
-        user: 'Ismail El Shinnawy',
-        timestamp: '01/01/2021 11:59 PM'
-    },
-    {
-        text:'Magna est eu deserunt ipsum sunt. Fugiat veniam duis nulla ipsum qui sunt aliqua deserunt aute sint adipisicing pariatur nostrud. Ipsum ad Lorem pariatur ex voluptate. Sunt adipisicing elit excepteur sit aliqua commodo ad anim Lorem velit sit veniam ipsum.',
-        user: 'Ismail El Shinnawy',
-        timestamp: '01/01/2021 11:59 PM'
-    },
-    {
-        text:'Magna est eu deserunt ipsum sunt. Fugiat veniam duis nulla ipsum qui sunt aliqua deserunt aute sint adipisicing pariatur nostrud. Ipsum ad Lorem pariatur ex voluptate. Sunt adipisicing elit excepteur sit aliqua commodo ad anim Lorem velit sit veniam ipsum.',
-        user: 'Ismail El Shinnawy',
-        timestamp: '01/01/2021 11:59 PM'
-    },
-    {
-        text:'Magna est eu deserunt ipsum sunt. Fugiat veniam duis nulla ipsum qui sunt aliqua deserunt aute sint adipisicing pariatur nostrud. Ipsum ad Lorem pariatur ex voluptate. Sunt adipisicing elit excepteur sit aliqua commodo ad anim Lorem velit sit veniam ipsum.',
-        user: 'Ismail El Shinnawy',
-        timestamp: '01/01/2021 11:59 PM'
-    },
-    {
-        text:'Magna est eu deserunt ipsum sunt. Fugiat veniam duis nulla ipsum qui sunt aliqua deserunt aute sint adipisicing pariatur nostrud. Ipsum ad Lorem pariatur ex voluptate. Sunt adipisicing elit excepteur sit aliqua commodo ad anim Lorem velit sit veniam ipsum.',
-        user: 'Ismail El Shinnawy',
-        timestamp: '01/01/2021 11:59 PM'
-    },
-    {
-        text:'Magna est eu deserunt ipsum sunt. Fugiat veniam duis nulla ipsum qui sunt aliqua deserunt aute sint adipisicing pariatur nostrud. Ipsum ad Lorem pariatur ex voluptate. Sunt adipisicing elit excepteur sit aliqua commodo ad anim Lorem velit sit veniam ipsum.',
-        user: 'Ismail El Shinnawy',
-        timestamp: '01/01/2021 11:59 PM'
-    },
-]
-
+// renders index file when root is requested
 app.get('/', (req, res) =>{
-    res.render('index', {content});
+    res.redirect('/items');
 });
+
+app.use('/items', itemsRouter);
+

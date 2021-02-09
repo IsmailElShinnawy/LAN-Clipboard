@@ -59,13 +59,25 @@ body {
   border-radius: 10px;
   padding: 5px;
   display: inline-block;
-  /* white-space: nowrap;
-  overflow-x: scroll; */
 }
 .item-wrapper{
   display: flex;
   align-items: center;
   margin: 5px;
   border-bottom: 1px solid #b5b5b5;
+}
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 /* END OF CLIPBOARD STYLES */
