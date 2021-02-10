@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 
 const io = socketio(server);
 io.on('connection', (socket)=>{
-    console.log(`user connected`);
+    console.log('user connected');
     socket.on('disconnect', ()=>{
         console.log('user disconnected');
     });

@@ -1,32 +1,22 @@
-const pool = require('../model/database');
+const db = require('../model/database');
 
 const items_index = (req, res) => {
-    pool.connect()
-        .then(client => {
-            const get_all_items_query = `
-            SELECT
-                I.text,
-                I.timestamp,
-                U.login_name
-            FROM
-                item I
-            INNER JOIN users U USING(user_id);
-            `;
-            client
-                .query(get_all_items_query)
-                .then((result) => {
-                    res.render('index', {content: result.rows});
-                })
-                .catch(err => {
-                    console.log(err);
-                });
-        })
-        .catch(err => {
+    db.all(`
+    SELECT
+        I.text,
+        I.timestamp,
+        U.login_name
+    FROM
+        item I
+    INNER JOIN user U
+        ON I.user_id = U.user_id;
+    `, [], (err, rows) => {
+        if(err){
             console.log(err);
-        });
-        // .finally(() => {
-        //     pool.end();
-        // });
+            return;
+        }
+        res.render('index', {content: rows});
+    })
 }
 
 
