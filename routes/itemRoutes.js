@@ -5,5 +5,6 @@ const itemsRouter = express.Router();
 
 itemsRouter.get('/', itemController.items_index);
 itemsRouter.post('/', itemController.item_paste_post);
+itemsRouter.delete('/:id', itemController.item_delete);
 
 module.exports = itemsRouter;
