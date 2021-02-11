@@ -17,7 +17,7 @@ db.serialize(() => {
         );
         `, [], (err) => {
             if(err) {
-                console.log(err);
+                console.log('Table user already exists');
             }
         })
         .run(`
@@ -30,44 +30,9 @@ db.serialize(() => {
         );  
         `, [], (err) => {
             if(err) {
-                console.log(err);
+                console.log('Table item already exists');
             }
         });
-        // .run(`
-        // INSERT INTO user (login_name)
-        // VALUES ('Ismail El Shinnawy');
-        // `, [], (err) => {
-        //     if(err){
-        //         console.log(err);
-        //     }
-        // });
-        // .run(`
-        // INSERT INTO item (text, user_id)
-        // VALUES ('Some random text to test', 1),
-        // ('Some random text to test', 1),
-        // ('Some random text to test', 1),
-        // ('Some random text to test', 1),
-        // ('Some random text to test', 1);
-        // `, [], (err) => {
-        //     if(err) {
-        //         console.log(err);
-        //     }
-        // })
-        // .all(`
-        // SELECT
-        //     *
-        // FROM
-        //     item;
-        // `, [], (err, rows) => {
-        //     if(err){
-        //         console.log(err);
-        //         return;
-        //     }
-            
-        //     rows.forEach(row => {
-        //         console.log(`${row.text} ${row.user_id}`);
-        //     });
-        // });
 });
 
 module.exports = db;
