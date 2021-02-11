@@ -24,7 +24,7 @@ db.serialize(() => {
         CREATE TABLE item(
             item_id INTEGER PRIMARY KEY,
             text VARCHAR,
-            timestamp TIMESTAMP,
+            timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             user_id INTEGER,
             CONSTRAINT fk_user_id_item FOREIGN KEY (user_id) REFERENCES user (user_id)
         );  
@@ -40,7 +40,7 @@ db.serialize(() => {
         //     if(err){
         //         console.log(err);
         //     }
-        // })
+        // });
         // .run(`
         // INSERT INTO item (text, user_id)
         // VALUES ('Some random text to test', 1),
