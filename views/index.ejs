@@ -26,26 +26,6 @@
     <div id="main">
         <span style="font-size:30px;cursor:pointer" onclick="toggleNav()">&#9776;</span>
     </div>
-
-    <script>
-        let isClosed = true;
-        function openNav() {
-            document.getElementById("mySidenav").style.width = "250px";
-            document.getElementById("main").style.marginLeft = "250px";
-            isClosed = false;
-        }
-
-        function closeNav() {
-            document.getElementById("mySidenav").style.width = "0";
-            document.getElementById("main").style.marginLeft = "0";
-            isClosed = true;
-        }
-
-        function toggleNav() {
-            if (isClosed) openNav();
-            else closeNav();
-        }
-    </script>
     <!-- END OF SIDE BAR -->
 
     <div class="container">
@@ -63,18 +43,73 @@
 
         <div class="clipboard">
             <% if(content.length > 0) { %> 
-                <% content.forEach((item) => { %>
+                <% content.forEach((item, index) => { %>
                     <div class="item-wrapper">
                         <div class="item">
-                            <p><%= item.text %></p>
-                            <footer class="blockquote-footer"><%= item.login_name %> at <cite title="Source Title"><%= item.timestamp %></cite></footer>
+                            <p id="text-<%= item.item_id %>"><%= item.text %></p>
+                            <footer class="blockquote-footer"><%= item.login_name %><br>at <cite title=""><%= item.timestamp %></cite></footer>
                         </div>
-                        <button type="button" class="btn" style="margin: 10px"><span class="glyphicon glyphicon-copy"></button>
+                        <button type="button" class="btn" style="margin: 10px" onclick="copyToClipboard('#text-<%= item.item_id %>')">
+                            <span class="glyphicon glyphicon-copy">
+                        </button>
+                        <button type="button" class="btn btn-danger delete-button" style="margin: 10px" data-itemid="<%= item.item_id %>">
+                            <span class="glyphicon glyphicon-trash">
+                        </button>
                     </div>
                 <% }); %>
             <% } %> 
         </div>
     </div>
+
+
+    
+    <script>
+        // SIDE BAR functions
+        let isClosed = true;
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+            document.getElementById("main").style.marginLeft = "250px";
+            isClosed = false;
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("main").style.marginLeft = "0";
+            isClosed = true;
+        }
+
+        function toggleNav() {
+            if (isClosed) openNav();
+            else closeNav();
+        }
+        // END OF SIDE BAR functions
+
+        // COPY TO CLIPBOARD functions
+        function copyToClipboard(element) {
+            const $temp = $("<input>");
+            $("body").append($temp);
+            $temp.val($(element).text()).select();
+            document.execCommand("copy");
+            $temp.remove();
+        }
+        // END OF COPY TO CLIPBOARD functions
+
+        // DELETE FROM CLIPBOARD functions
+        const trashcans = document.querySelectorAll('button.delete-button');
+        // console.log(trashcans);
+        trashcans.forEach((trashcan) => {
+            trashcan.addEventListener('click', (e) => {
+                const endpoint = `/items/${trashcan.dataset.itemid}`;
+                fetch(endpoint, {
+                    method: 'DELETE',
+                })
+                    .then((response) => response.json())
+                    .then((data) => {console.log(data.redirect); window.location.href = data.redirect})
+                    .catch((err) => console.log(err));
+            });
+        });
+        // END OF DELETE FROM CLIPBOARD functions
+    </script>
 </body>
 
 </html>
