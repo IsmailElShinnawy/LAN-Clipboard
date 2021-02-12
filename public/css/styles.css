@@ -35,10 +35,40 @@
 }
 /* END OF SIDE BAR STYLES */
 
+/* LOGIN PAGE STYLES */
+.outer-login-container{
+  height:100%;
+  width:100%;
+  display: flex;
+  align-items: center;
+}
+.login-container{
+  display: flex;
+  align-items: center;
+  height: 300px;
+  width: 400px;
+  background-color: #e6e6e6;
+  margin: auto;
+  border-radius: 10px;
+}
+.login-form{
+  margin-left: 25px;
+  margin-right: 25px;
+}
+@media screen and (max-width: 500px){
+  .login-container{
+    width: 300px;
+    height: 200px;
+    font-size: 10px;
+  }
+}
+/* END OF LOGIN PAGE STYLES */
+
 /* CLIPBOARD STYLES */
 body {
   height: 100vh;
   width: 100vw;
+  margin: 0;
 }
 .container{
   height: 90%;
@@ -55,15 +85,15 @@ body {
 }
 .item{
   width: 90%;
-  margin: 20px;
+  margin: 5px;
   border-radius: 10px;
-  padding: 5px;
+  padding: 10px;
   display: inline-block;
 }
 .item-wrapper{
   display: flex;
   align-items: center;
-  margin: 5px;
+  margin: 1px;
   border-bottom: 1px solid #b5b5b5;
 }
 ::-webkit-scrollbar {
