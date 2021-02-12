@@ -49,10 +49,10 @@
                             <p id="text-<%= item.item_id %>"><%= item.text %></p>
                             <footer class="blockquote-footer"><%= item.login_name %><br>at <cite title=""><%= item.timestamp %></cite></footer>
                         </div>
-                        <button type="button" class="btn" style="margin: 10px" onclick="copyToClipboard('#text-<%= item.item_id %>')">
+                        <button type="button" class="btn" style="margin: 5px" onclick="copyToClipboard('#text-<%= item.item_id %>')">
                             <span class="glyphicon glyphicon-copy">
                         </button>
-                        <button type="button" class="btn btn-danger delete-button" style="margin: 10px" data-itemid="<%= item.item_id %>">
+                        <button type="button" class="btn btn-danger delete-button" data-itemid="<%= item.item_id %>">
                             <span class="glyphicon glyphicon-trash">
                         </button>
                     </div>

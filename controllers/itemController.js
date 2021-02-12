@@ -1,6 +1,10 @@
 const db = require('../model/database');
 
 const items_index = (req, res) => {
+    if(!req.session.user_id){
+        res.redirect('/login');
+        return;
+    }
     db.all(`
     SELECT
         I.item_id,
@@ -28,8 +32,8 @@ const item_paste_post = (req, res) => {
         db
             .run(`
             INSERT INTO item (text, user_id)
-            VALUES (?, 1);
-            `, [text], (err) => {
+            VALUES (?, ?);
+            `, [text, req.session.user_id], (err) => {
                 if (err) {
                     console.log(err);
                 }
