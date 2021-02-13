@@ -29,6 +29,9 @@
   font-size: 36px;
   margin-left: 50px;
 }
+#sidenav-icon-container{
+  display: inline-block;
+}
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}

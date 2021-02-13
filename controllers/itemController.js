@@ -23,11 +23,23 @@ const items_index = (req, res) => {
             console.log(err);
             return;
         }
-        res.render('index', { content: rows, current_user_id: req.session.user_id });
+        res.render('index', { 
+            content: rows, 
+            current_user: 
+                {
+                    user_id: req.session.user_id, 
+                    login_name: req.session.login_name 
+                },
+            title: 'Home',
+        });
     })
 }
 
 const item_paste_post = (req, res) => {
+    if(!req.session.user_id){
+        res.redirect('/login');
+        return;
+    }
     const text = req.body.new_item;
     db.serialize(() => {
         db
@@ -57,12 +69,24 @@ const item_paste_post = (req, res) => {
                     console.log(err);
                     return;
                 }
-                res.render('index', { content: rows, current_user_id: req.session.user_id });
+                res.render('index', { 
+                    content: rows, 
+                    current_user: 
+                        {
+                            user_id: req.session.user_id, 
+                            login_name: req.session.login_name 
+                        },
+                    title: 'Home',
+                });
             });
     });
 }
 
 const item_delete = (req, res) => {
+    if(!req.session.user_id){
+        res.redirect('/login');
+        return;
+    }
     const delete_id = req.params.id;
     db.serialize(() => {
         db
@@ -96,9 +120,42 @@ const item_delete = (req, res) => {
     });
 }
 
+const items_user_get = (req, res) => {
+    if(!req.session.user_id){
+        res.redirect('/login');
+        return;
+    }
+    const user_id = req.params.id;
+    db.all(`
+    SELECT
+        item_id,
+        text,
+        timestamp
+    FROM
+        item
+    WHERE
+        user_id = ?;
+    `, [user_id], (err, rows) => {
+        if(err){
+            console.log(err);
+            return;
+        }
+        res.render('myClipboard', { 
+            content: rows, 
+            current_user: 
+                {
+                    user_id: req.session.user_id, 
+                    login_name: req.session.login_name 
+                },
+            title: 'My Clipboard',
+        });
+    })
+}
+
 
 module.exports = {
     items_index,
     item_paste_post,
     item_delete,
+    items_user_get,
 }

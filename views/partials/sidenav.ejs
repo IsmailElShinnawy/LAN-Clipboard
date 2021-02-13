@@ -1,0 +1,11 @@
+<!-- SIDE NAV -->
+<div id="mySidenav" class="sidenav">
+    <a href="/items">Home</a>
+    <a href="/items/user/<%= current_user.user_id %>">My Clipboard</a>
+    <a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+</div>
+
+<div id="sidenav-icon-container">
+    <h2><span style="font-size:30px;cursor:pointer" onclick="toggleNav()">&#9776;</span> u/<%= current_user.login_name %></h2>
+</div>
+<!-- END OF SIDE NAV -->

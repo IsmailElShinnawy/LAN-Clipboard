@@ -26,6 +26,7 @@ const login_check_credinitials = (req, res) => {
             // if user exists then login in else insert new record into database
             if(row){
                 req.session.user_id = row.user_id;
+                req.session.login_name = loginName;
                 res.redirect('/items');
             }else{
                 db.run(`
@@ -49,6 +50,7 @@ const login_check_credinitials = (req, res) => {
                             return;
                         }
                         req.session.user_id = row.user_id;
+                        req.session.login_name = loginName;
                         res.redirect('/items');
                     })
                 });
