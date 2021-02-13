@@ -27,6 +27,8 @@ db.serialize(() => {
             timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             user_id INTEGER,
             CONSTRAINT fk_user_id_item FOREIGN KEY (user_id) REFERENCES user (user_id)
+                ON DELETE CASCADE
+                ON UPDATE NO ACTION
         );  
         `, [], (err) => {
             if(err) {

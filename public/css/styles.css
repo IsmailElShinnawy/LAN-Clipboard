@@ -90,6 +90,9 @@ body {
   padding: 10px;
   display: inline-block;
 }
+.item.other-user-item{
+  text-align: right;
+}
 .item-wrapper{
   display: flex;
   align-items: center;

@@ -13,7 +13,7 @@ const login_check_credinitials = (req, res) => {
         // check if a user with the same name already exists
         db.get(`
         SELECT
-            1
+            user_id
         FROM
             user
         WHERE
@@ -23,9 +23,10 @@ const login_check_credinitials = (req, res) => {
                 console.log(err);
                 return;
             }
-            // if user exists then display error else insert new record into database
+            // if user exists then login in else insert new record into database
             if(row){
-                res.render('login', {err: 'A user already exists with the same name'})
+                req.session.user_id = row.user_id;
+                res.redirect('/items');
             }else{
                 db.run(`
                 INSERT INTO user(login_name)

@@ -45,9 +45,9 @@
             <% if(content.length > 0) { %> 
                 <% content.forEach((item, index) => { %>
                     <div class="item-wrapper">
-                        <div class="item">
+                        <div class="item <%= item.user_id == current_user_id ? 'user-item' : 'other-user-item' %>" >
                             <p id="text-<%= item.item_id %>"><%= item.text %></p>
-                            <footer class="blockquote-footer"><%= item.login_name %><br>at <cite title=""><%= item.timestamp %></cite></footer>
+                            <footer class="blockquote-footer"><%= item.login_name %><br>at <cite><%= item.timestamp %></cite></footer>
                         </div>
                         <button type="button" class="btn" style="margin: 5px" onclick="copyToClipboard('#text-<%= item.item_id %>')">
                             <span class="glyphicon glyphicon-copy">

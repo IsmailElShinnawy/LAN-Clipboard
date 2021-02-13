@@ -10,6 +10,7 @@ const items_index = (req, res) => {
         I.item_id,
         I.text,
         datetime(I.timestamp, 'localtime') AS timestamp,
+        I.user_id,
         U.login_name
     FROM
         item I
@@ -22,7 +23,7 @@ const items_index = (req, res) => {
             console.log(err);
             return;
         }
-        res.render('index', { content: rows });
+        res.render('index', { content: rows, current_user_id: req.session.user_id });
     })
 }
 
@@ -43,6 +44,7 @@ const item_paste_post = (req, res) => {
                 I.item_id,
                 I.text,
                 datetime(I.timestamp,'localtime') AS timestamp,
+                I.user_id,
                 U.login_name
             FROM
                 item I
@@ -55,7 +57,7 @@ const item_paste_post = (req, res) => {
                     console.log(err);
                     return;
                 }
-                res.render('index', { content: rows });
+                res.render('index', { content: rows, current_user_id: req.session.user_id });
             });
     });
 }
