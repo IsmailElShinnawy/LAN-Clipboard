@@ -1,5 +1,5 @@
 /node_modules
 package-lock.json
 .env
-/model/database_2.js
 /db/lan_clipboard.db
+app.vbs

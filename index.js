@@ -13,6 +13,17 @@ const server = app.listen(PORT, () => {
     console.log(`http://localhost:${PORT}`);
 });
 
+const io = require('socket.io')(server);
+
+io.on('connection', (socket) => {
+    socket.on('delete item', () => {
+        io.emit('delete item');
+    });
+    socket.on('pasted item', () => {
+        io.emit('pasted item');
+    });
+});
+
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
@@ -22,7 +33,11 @@ app.use(session({
 
 // renders index file when root is requested
 app.get('/', (req, res) =>{
-    res.redirect('/login');
+    if(!req.session.user_id){
+        res.redirect('/login');
+    } else {
+        res.redirect('/items');
+    }
 });
 
 app.use('/items', itemsRouter);

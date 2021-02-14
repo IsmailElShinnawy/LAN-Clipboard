@@ -99,7 +99,7 @@ body {
 .item-wrapper{
   display: flex;
   align-items: center;
-  margin: 1px;
+  margin: 10px;
   border-bottom: 1px solid #b5b5b5;
 }
 ::-webkit-scrollbar {
