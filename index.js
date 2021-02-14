@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
 const itemsRouter = require('./routes/itemRoutes');
-const loginRouter = require('./routes/loginRoutes');
+const usersRouter = require('./routes/usersRoutes');
 
 const app = express(); // creates an Express App
 const PORT = process.env.PORT || 3000; // sets PORT number to the enviroment PORT if available or 3000
@@ -22,6 +22,10 @@ io.on('connection', (socket) => {
     socket.on('pasted item', () => {
         io.emit('pasted item');
     });
+    socket.on('delete user', () => {
+        // io.emit('delete user');
+        socket.broadcast.emit('delete user');
+    })
 });
 
 app.set('view engine', 'ejs');
@@ -34,12 +38,12 @@ app.use(session({
 // renders index file when root is requested
 app.get('/', (req, res) =>{
     if(!req.session.user_id){
-        res.redirect('/login');
+        res.redirect('/users/login');
     } else {
         res.redirect('/items');
     }
 });
 
 app.use('/items', itemsRouter);
-app.use('/login', loginRouter);
+app.use('/users', usersRouter);
 

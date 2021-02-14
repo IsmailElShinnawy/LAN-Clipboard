@@ -42,8 +42,6 @@
 
 
     
-    <script src="/scripts/sidenav.js"></script>
-    <script src="/scripts/clipboard.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script>
         let socket = io();
@@ -72,7 +70,13 @@
         socket.on('pasted item', () => {
             window.location.href = '/items';
         });
+
+        socket.on('delete user', () => {
+            window.location.href = '/items';
+        })
     </script>
+    <script src="/scripts/sidenav.js"></script>
+    <script src="/scripts/clipboard.js"></script>
     
 </body>
 

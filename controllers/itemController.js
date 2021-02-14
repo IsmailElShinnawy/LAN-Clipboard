@@ -2,7 +2,7 @@ const db = require('../model/database');
 
 const items_index = (req, res) => {
     if(!req.session.user_id){
-        res.redirect('/login');
+        res.redirect('/users/login');
         return;
     }
     db.all(`
@@ -37,7 +37,7 @@ const items_index = (req, res) => {
 
 const item_paste_post = (req, res) => {
     if(!req.session.user_id){
-        res.redirect('/login');
+        res.redirect('/users/login');
         return;
     }
     const text = req.body.new_item;
@@ -84,7 +84,7 @@ const item_paste_post = (req, res) => {
 
 const item_delete = (req, res) => {
     if(!req.session.user_id){
-        res.redirect('/login');
+        res.redirect('/users/login');
         return;
     }
     const delete_id = req.params.id;
@@ -122,7 +122,7 @@ const item_delete = (req, res) => {
 
 const items_user_get = (req, res) => {
     if(!req.session.user_id){
-        res.redirect('/login');
+        res.redirect('/users/login');
         return;
     }
     const user_id = req.params.id;

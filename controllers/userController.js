@@ -59,8 +59,48 @@ const login_check_credinitials = (req, res) => {
     }
 }
 
+const logout = (req, res) => {
+    req.session.user_id = null;
+    req.session.login_name = null;
+    res.redirect('/users/login');
+}
+
+const user_delete = (req, res) => {
+    const deleteid = req.params.id;
+    if(req.session.user_id != deleteid){
+        res.redirect('/items');
+    } else {
+        db.serialize(() => {
+            db
+                .run(`
+                DELETE FROM user
+                WHERE user_id = ?;
+                `, [deleteid], (err) => {
+                    if(err){
+                        console.log(err);
+                        return;
+                    }
+                })
+                .run(`
+                DELETE FROM item
+                WHERE user_id = ?
+                `, [deleteid], (err) => {
+                    if(err) {
+                        console.log(err);
+                        return;
+                    }
+                    res.json({ 
+                        redirect: '/users/logout',
+                    });
+                });
+        });
+    }
+}
+
 
 module.exports = {
     login_index,
     login_check_credinitials,
+    logout,
+    user_delete,
 }

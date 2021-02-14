@@ -2,7 +2,10 @@
 <div id="mySidenav" class="sidenav">
     <a href="/items">Home</a>
     <a href="/items/user/<%= current_user.user_id %>">My Clipboard</a>
-    <a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+    <a href="/users/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+    <br>
+    <br>
+    <button id="delete-user" data-userid="<%= current_user.user_id %>" style="display: block; margin: auto" class="btn btn-danger">Delete user</button></div>
 </div>
 
 <div id="sidenav-icon-container">
