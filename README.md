@@ -58,7 +58,9 @@ A video demo: <https://youtu.be/qLrLzOocVww>
 
 - Make sure both the machine running the server and the other device you're trying to connect are on the same LAN.
 
-- Enter the IP as a URL in the other device's browser.
+- Enter the IP followed by the port number as a URL in the other device's browser.
+
+    example: 0.0.0.0:3000.
 
 ## Additional info
 
